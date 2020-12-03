@@ -19,4 +19,11 @@ def count_trees(pos, step_sizes, rows, tree_count=0):
     return count_trees((new_x, new_y), step_sizes, rows, tree_count)
 
 
-print(count_trees(pos, (3, 1), rows))
+step_sizes = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]
+results = [count_trees((0, 0), step_size, rows) for step_size in step_sizes]
+
+product = 1
+for result in results:
+    product *= result
+
+print(product)
