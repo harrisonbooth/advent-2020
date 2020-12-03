@@ -1,4 +1,4 @@
-rows = [list(str_row) for str_row in open('input.txt', 'r').read().split('\n')]
+rows = open('input.txt', 'r').read().split('\n')
 
 pos = (0, 0)
 
