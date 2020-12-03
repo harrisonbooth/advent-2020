@@ -5,3 +5,4 @@ expenses = [int(str_expense)
 for expense in expenses:
     if 2020 - expense in expenses:
         print(expense * (2020 - expense))
+        break
