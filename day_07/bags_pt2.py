@@ -15,23 +15,20 @@ bag_rules_dicts = {outer: list(filter(lambda a: a != '', re.split(
     bag_re, inner))) for [outer, inner] in bag_rules_pairs}
 
 
-# print(bag_rules_amounts)
-def outer_bag_count(bags, dict, containers=[]):
-    new_containers = [key for (key, value) in dict.items()
-                      for bag in bags if bag in value]
-    if (len(new_containers) < 1):
-        return set(containers)
-    containers.extend(new_containers)
-    return outer_bag_count(new_containers, dict, containers)
+def internal_bag_count(bags_to_check, dict, bags={}):
+    new_bags = {}
+    for [bag, amount] in bags_to_check.items():
+        for [new_bag, new_amount] in dict[bag].items():
+            new_bags[new_bag] = new_bags.get(
+                new_bag, 0) + new_amount * amount
+
+    for [new_bag, amount] in new_bags.items():
+        bags[new_bag] = bags.get(new_bag, 0) + amount
+
+    if len(bags_to_check) < 1:
+        return bags
+    return internal_bag_count(new_bags, dict, bags)
 
 
-def internal_bag_count(bags, dict, internal_bags=[]):
-    new_bags = [bag_type
-                for bag in bags for [bag_type, amount] in dict[bag].items() for i in range(amount)]
-    if len(new_bags) < 1:
-        return internal_bags
-    internal_bags.extend(new_bags)
-    return internal_bag_count(new_bags, dict, internal_bags)
-
-
-print(len(internal_bag_count(["shiny gold bag"], bag_rules_amounts)))
+print(sum(internal_bag_count(
+    {"shiny gold bag": 1}, bag_rules_amounts).values()))
