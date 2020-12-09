@@ -1,11 +1,3 @@
-# byr (Birth Year)
-# iyr (Issue Year)
-# eyr (Expiration Year)
-# hgt (Height)
-# hcl (Hair Color)
-# ecl (Eye Color)
-# pid (Passport ID)
-# cid (Country ID) [OPTIONAL]
 required_fields = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]
 
 passports = [passport_string.split() for passport_string in open('input.txt', 'r').read().split('\n\n')]
