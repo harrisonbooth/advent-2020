@@ -2,8 +2,7 @@ passwords = open('input.txt', 'r').read().split('\n')
 
 
 def check_letters(letter, pos1, pos2, str):
-    return ((str[pos1] == letter or str[pos2] == letter)
-            and not (str[pos1] == letter and str[pos2] == letter))
+    return (str[pos1] == letter) ^ (str[pos2] == letter)
 
 
 passwords = [([int(limit) for limit in limits.split('-')], letter[0], password)
